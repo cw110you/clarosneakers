@@ -1,0 +1,72 @@
+@model List<Cart>
+
+<div id="cart-page">
+    <div class="container py-3">
+        @if(Model.Count > 0){
+            Int32 totalPrice = 0, totalQuantity = 0;
+            <form id="cart-form" class="col-12" action="/cart/checkout" method="GET">
+                <div class="row align-items-center title-font">
+                    <input class="col-1" type="checkbox" onchange="selectAll(this)">
+                    <span class="col-lg-4 col-5">商品</span>
+                    <span class="col-2 text-center">單價</span>
+                    <span class="col-lg-1 col-2">數量</span>
+                    <span class="col-lg-2 d-none d-lg-block text-center">小計</span>
+                    <span class="col-2"></span>
+                </div>
+                <hr class="col-12">
+
+                @foreach (var cart in Model)
+                {
+                    Int32 subTotal = cart.Product.Price*cart.Quantity;
+                    totalPrice += subTotal;
+                    totalQuantity += cart.Quantity;
+                    <div class="row align-items-center" data-product-id="@cart.ProductId" >
+                        <input name="cartCheckbox" class="col-1" type="checkbox" value="@cart.Id" onchange="checkCart(this)">
+                        <a class="col-2" href="/product/detail/@cart.ProductId"><div class="row"><span class="col-12"><img src="/images/products/default.png" data-src="@cart.Product.Images.FirstOrDefault().Url" onload="imgScaler(event)"></span></div></a>
+                        <a class="col-lg-2 col-3" href="/product/detail/@cart.ProductId">@cart.Product.Name</a>
+                        <span class="price col-2 text-center">$@cart.Product.Price</span>
+                        <select name="cartQuantity" class="custom-select col-lg-1 col-2" onchange="updateQuantity(this)">
+                            @for (int i = 1; i <= cart.Product.Stock; i++)
+                            {
+                                <option @(i == cart.Quantity ? "selected" : "") value="@i">@i</option>
+                            }
+                        </select>
+                        <span class="sub-total col-lg-2 d-none d-lg-block text-center">$@subTotal</span>
+                        <span class="cart-del col-2 text-center" onclick="deleteCart(this)">刪除</span>
+                        <hr class="col-12">
+                    </div>
+                }
+                
+                <div class="row align-items-center">
+                    <span class="col-4" ><button class="btn btn-outline-secondary" type="button" onclick="deleteSelectedCart()">刪除已選項目</button></span>
+                    <div class="col-8 text-right">
+                        <span class="total-price">$@totalPrice</span>
+                        <span class="total-quantity">(共 @totalQuantity 件)</span>
+                        <button class="btn btn-secondary" type="submit">結帳</button>
+                    </div>
+                </div>
+                
+                <div id="message" class="d-none"></div>
+                
+            </form>
+        }
+        <div id="no-cart" class='col-12 py-5 @(Model.Count == 0 ? "" : "d-none")'>
+            <div class="d-flex justify-content-center mb-4">
+                <h4>購物車沒有商品</h4>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/"><button class="btn btn-secondary">回首頁</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Cart/index.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Cart/index.js"></script>
+}

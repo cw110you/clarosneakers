@@ -1,0 +1,61 @@
+@model HomeIndexViewModel;
+<div id="home" class="jumbotron" data-onload="homeOnload()">
+    <section>
+        <div class="container p-0">
+            <div id="banner">
+                <ul class="ad-list ad-list-transition" data-current="0" data-state="0">
+                    @foreach (var advt in Model.advertisements)
+                    {
+                        <li>
+                            <div>
+                                <a href="@advt.AdLink">
+                                    <img src="@advt.ImgSrc" alt="">
+                                </a>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <i id="adPrev" class="btn-prev fas fa-caret-left fa-7x"></i>
+                <i id="adNext" class="btn-next fas fa-caret-right fa-7x"></i>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="category" class="container p-0">
+            <div class="row no-gutters row-cols-lg-6 row-cols-md-3 row-cols-2">
+                @foreach (var cat in Model.categories)
+                {
+                    <div class="category col" onclick="redirectToSearch(@cat.Id)">
+                        <img src="@cat.ImgSrc" />
+                        <span>@cat.Name</span>
+                    </div>
+                }
+                <div class="category col" onclick="redirectToSearch(0)"><img src="/images/categories/other.png" /><span>所有商品</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="products" class="container p-0 pb-4">
+            <div class="row no-gutters row-cols-lg-5 row-cols-md-3 row-cols-1">
+                @foreach(var prd in Model.products){
+                    <div class="product" onclick="redirectToDetail(@prd.Id)">
+                        <span class="image"><img src="/images/products/default.png" data-src="@prd.Images.FirstOrDefault().Url" onload="imgScaler(event)" /></span>
+                        <span class="name title-font">@prd.Name</span>
+                        <span class="price title-font">$@prd.Price</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Home/index.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Home/index.js"></script>
+}

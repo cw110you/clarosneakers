@@ -1,0 +1,50 @@
+<div id="header" class="jumbotron fixed-top" data-onload="headerOnload()">
+    <div class="container">
+        <div class="row">
+            <div id="logo" class="col-2">
+                <a class="" href="/">
+                    <picture>
+                        <source srcset="/favicon-original.png" media="(max-width: 767px)"/>
+                        <img src="/logo.png" alt="">
+                    </picture>
+                </a>
+            </div>
+
+            <div id="searchbar" class="col-lg-8 col-md-7 col-6">
+                <form class="my-2" onsubmit="return check()">
+                    <div class="input-group">
+                        <input id="keyword" class="form-control" type="search" placeholder="Search" aria-label="請輸入商品關鍵字" data-onload="getKeyword()" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-light" type="submit">搜尋</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-lg-2 col-md-3 col-4">
+                <div id="memberInfo" class="dropdown">
+                    <img src="/profile.png" alt="" id="dropdownMenu" data-toggle="dropdown">
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/member">會員中心</a>
+                        <a class="dropdown-item" href="/order">查詢訂單</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/login/logout">登出</a>
+                    </div>
+                </div>
+                
+                <div id="cart">
+                    <a href="/cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cartnumber">1</span>
+                    </a>
+                </div>
+
+                <div id="login-signup">
+                    <span class="login" onclick="redirectTo('/login')">登入</span>
+                    <span>|</span>
+                    <span class="signup" onclick="redirectTo('/login/signup')">註冊</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

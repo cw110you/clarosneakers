@@ -1,0 +1,15 @@
+h1, h2, h3, h4, h5, h6, th{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+p, a, input, label, textarea, span, ul, li, td{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.title-font{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.content-font{
+    font-family: 'Open Sans', sans-serif;
+}

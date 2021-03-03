@@ -1,0 +1,23 @@
+#signup{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#signup form span{
+    float: right;
+    right: 20px;
+}
+
+#signup form span a, #signup form span a:hover{
+    text-decoration: none;
+    color: #555555;
+    
+    font-size: .8rem;
+}
+#signup #error-message{
+    margin-bottom: 12px;
+    color: #eb7373;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

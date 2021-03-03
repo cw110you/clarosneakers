@@ -1,0 +1,97 @@
+@model Member
+
+<div id="checkout-page">
+    <div class="container py-3">
+        @if(Model.Carts.Count > 0){
+            Int32 totalPrice = 0, totalQuantity = 0;
+            <form id="checkout-form" class="col-12" action="/order/insert" method="POST">
+                <div class="row py-3">
+                    <span class="offset-5 col-2 text-right">單價</span>
+                    <span class="col-2 text-right">數量</span>
+                    <span class="col-3 text-right">合計</span>
+                </div>
+
+                @foreach (var cart in Model.Carts)
+                {
+                    Int32 subTotal = cart.Product.Price*cart.Quantity;
+                    totalPrice += subTotal;
+                    totalQuantity += cart.Quantity;
+                    <div class="row align-items-center" data-product-id="@cart.ProductId" >
+                        <span class="col-md-1 d-none d-md-block" href="/product/detail/@cart.ProductId"><div class="row"><span class="col-12"><img src="/images/products/default.png" data-src="@cart.Product.Images.FirstOrDefault().Url" onload="imgScaler(event)"></span></div></span>
+                        <input name="products[@Model.Carts.IndexOf(cart)].productId" type="hidden" value="@cart.ProductId">
+                        <span class="col-md-4 col-5">@cart.Product.Name</span>
+                        <span class="col-2 text-right">$@cart.Product.Price</span>
+                        <span class="col-2 text-right">@cart.Quantity</span>
+                        <input name="products[@Model.Carts.IndexOf(cart)].quantity" type="hidden" value="@cart.Quantity">
+                        <span class="col-3 text-right">$@subTotal</span>
+                    </div>
+                }
+
+                <hr class="col-12">
+                <div class="row">
+                    <div class="delivery col-12 text-right my-3">
+                        <span>配送資料</span>
+                        <span>(宅配貨到付款)</span>
+                        <span>運費：</span>
+                        <span>$150</span>
+                    </div>
+
+                    <div class="input-group col-lg-3 col-md-6 col-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">收件人</span>
+                        </div>
+                        <input name="consignee" type="text" class="form-control" value="@Model.Username" pattern=".{1,20}" placeholder="姓名至多20個字" required>
+                    </div>
+                    
+                    <div class="input-group col-lg-3 col-md-6 col-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">電話</span>
+                        </div>
+                        <input name="phonenumber" type="text" class="form-control" value="@Model.Phone" pattern=".{1,20}" placeholder="電話至多20個字" required>
+                    </div>
+                    
+                    <div class="input-group col-lg-6 col-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">地址</span>
+                        </div>
+                        <input name="address" type="text" class="form-control" value="@Model.Address" pattern=".{5,40}" placeholder="地址至多40個字" required>
+                    </div>
+
+                    <div class="input-group col-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">備註</span>
+                        </div>
+                        <input name="remark" type="text" class="form-control" pattern=".{1,40}" placeholder="備註至多50個字">
+                    </div>
+                </div>
+
+                <hr class="col-12">
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <span class="total-quantity">(共 @totalQuantity 件商品)</span>
+                        <span class="total-price">$@(totalPrice+150)</span>
+                    </div>
+                </div>
+                
+                <button class="offset-md-3 offset-1 col-md-6 col-10 btn btn-secondary" type="submit">送出訂單</button>
+            </form>
+        }
+        else{
+        <div class='col-12 py-5'>
+            <div class="d-flex justify-content-center mb-4">
+                <h4>沒有商品</h4>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/"><button class="btn btn-secondary">回首頁</button></a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Cart/CheckOut.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}

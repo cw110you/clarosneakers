@@ -1,0 +1,41 @@
+@{
+    Layout = "_MemberLayout";
+}
+
+@model Member
+
+<div id="profile">
+    <div class="container">
+        <form class="col-12" onsubmit="return alterProfile()">
+            <div class="form-group row">
+                <label for="account" class="col-lg-2 col-3 col-form-label">帳號</label>
+                <input id="account" name="account" type="text" readonly class="col-lg-10 col-9 form-control-plaintext" value="@Model.Account">
+            </div>
+            <div class="form-group row">
+                <label for="username" class="col-lg-2 col-3 col-form-label">姓名</label>
+                <input  id="username" name="username" type="text" class="col-lg-10 col-9 form-control" value="@Model.Username" pattern=".{1,20}" placeholder="姓名至多20個字">
+            </div>
+            <div class="form-group row">
+                <label for="address" class="col-lg-2 col-3 col-form-label">地址</label>
+                <input  id="address" name="address" type="text" class="col-lg-10 col-9 form-control" value="@Model.Address" pattern=".{5,40}" placeholder="地址至多40個字">
+            </div>
+            <div class="form-group row">
+                <label for="phone" class="col-lg-2 col-3 col-form-label">電話</label>
+                <input  id="phone" name="phone" type="text" class="col-lg-10 col-9 form-control" value="@Model.Phone" pattern=".{1,20}" placeholder="電話至多20個字">
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-lg-2 col-3 col-form-label">Email</label>
+                <input  id="email" name="email" type="email" class="col-lg-10 col-9 form-control" value="@Model.Email" placeholder="email@example.com">
+            </div>
+            <div id="message"></div>
+            <button class="btn btn-secondary form-control" type="submit">儲存</button>
+        </form>
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Member/index.css">
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Member/index.js"></script>
+}

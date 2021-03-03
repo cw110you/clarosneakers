@@ -1,0 +1,78 @@
+@model Order
+
+<div id="new-order-page">
+    <div class="container py-3">
+        @if(Model != null){
+            <div class="row py-3">
+                <h4 class="col-12 text-center">訂單已完成</h4>
+                <span class="col-12 font-weight-bold">訂單編號：@Model.OrderNumber</span>
+                <span class="offset-5 col-2 text-right">單價</span>
+                <span class="col-2 text-right">數量</span>
+                <span class="col-3 text-right">合計</span>
+            </div>
+
+            Int32 totalPrice = 0, totalQuantity = 0;
+            @foreach (var item in Model.OrderItems)
+            {
+                Int32 subTotal = item.Price * item.Quantity;
+                totalPrice += subTotal;
+                totalQuantity += item.Quantity;
+                <div class="row align-items-center" data-product-id="@item.ProductId" >
+                    <span class="col-md-1 d-none d-md-block" href="/product/detail/@item.ProductId"><div class="row"><span class="col-12"><img src="/images/products/default.png" data-src="@item.Product.Images.FirstOrDefault().Url" onload="imgScaler(event)"></span></div></span>
+                    <span class="col-md-4 col-5">@item.Product.Name</span>
+                    <span class="col-2 text-right">$@item.Product.Price</span>
+                    <span class="col-2 text-right">@item.Quantity</span>
+                    <span class="col-3 text-right">$@subTotal</span>
+                </div>
+            }
+            <div class="row">
+                <div class="col-12 text-right">
+                    <span>運費：$150</span>
+                </div>
+            </div>
+
+            <hr class="col-12">
+            <div class="row">
+                <span class="col-12 font-weight-bold my-2">配送資料</span>
+
+                <span class="col-12 my-1 pl-5">收件人：@Model.Consignee</span>
+                <span class="col-12 my-1 pl-5">電話：@Model.PhoneNumber</span>
+                <span class="col-12 my-1 pl-5">地址：@Model.Address</span>
+                <span class="col-12 my-1 pl-5">備註：@(Model.Remark == null ? "無" : Model.Remark)</span>
+            </div>
+
+            <hr class="col-12">
+            <div class="row">
+                <div class="col-12 text-right">
+                    <span class="total-quantity">(共 @totalQuantity 件商品)</span>
+                    <span class="total-price">$@(totalPrice+150)</span>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-center">
+                <a href="/order"><button class="btn btn-secondary">查詢訂單</button></a>
+                <span>　</span>
+                <a href="/"><button class="btn btn-secondary">回首頁</button></a>
+            </div>
+        }
+        else{
+        <div class="col-12 py-5">
+            <div class="d-flex justify-content-center mb-4">
+                <h4>@ViewBag.errorMessage</h4>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/cart"><button class="btn btn-secondary">回購物車</button></a>
+                <span>　</span>
+                <a href="/order"><button class="btn btn-secondary">查詢訂單</button></a>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Order/Insert.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}

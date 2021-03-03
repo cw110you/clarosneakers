@@ -1,0 +1,92 @@
+header .jumbotron{
+    background-color: #FFF;
+    margin: 0;
+    padding: 0;
+}
+
+header .jumbotron .container{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#logo{
+    text-align: center;
+}
+#logo img{
+    height: 50px;
+}
+
+#searchbar button{
+    border: 1px solid #ced4da;
+    border-left: none;
+}
+
+
+
+#memberInfo, #login-signup, #cart{
+    display: inline;
+}
+
+#memberInfo img{
+    height: 42px;
+    padding: 2px;
+    border: solid 2px gray;
+    border-radius: 100%;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#login-signup{
+    position: absolute;
+    right: 15px;
+    top: 16px;
+}
+#login-signup .login, #login-signup .signup{
+    cursor: pointer;
+}
+#login-signup .login:hover, #login-signup .signup:hover{
+    font-weight: bold;
+}
+
+#cart i{
+    font-size: 27px;
+    color: gray;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+#cart .cartnumber{
+    line-height: 17px;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 100%;
+    border: solid 2px gray;
+    color: gray;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    top: -4px;
+    right: 15px;
+}
+#cart a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+
+
+
+
+@media (max-width: 991px){
+   #memberInfo{
+       padding: 0;
+   }
+}

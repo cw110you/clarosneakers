@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    @await Html.PartialAsync("_Styles")
+    @RenderSection("styles", required: false)
+    @RenderSection("headscripts", required: false)
+</head>
+<body>
+    <header>
+        @await Html.PartialAsync("_Header")
+    </header>
+    <div id="main">
+        @RenderBody()
+    </div>
+    <footer>
+        @await Html.PartialAsync("_Footer")
+    </footer>
+    @await Html.PartialAsync("_Scripts")
+    @RenderSection("footscripts", required: false)
+</body>
+</html>

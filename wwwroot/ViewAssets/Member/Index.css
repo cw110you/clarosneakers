@@ -1,0 +1,16 @@
+#profile{
+    padding: 20px 10px 35px 10px;
+    background-color: #fff;
+}
+
+#profile #message{
+    margin-bottom: 12px;
+    color: #52ca58;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-control::placeholder{
+  color: #cccccc;
+}

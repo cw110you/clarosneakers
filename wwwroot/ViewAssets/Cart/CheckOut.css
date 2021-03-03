@@ -1,0 +1,41 @@
+#checkout-page{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#checkout-page img{
+    width: 100%;
+}
+
+#checkout-page form hr{
+    margin: 8px 0;
+}
+
+#checkout-page a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+
+#checkout-form .delivery span:first-child{
+    float: left;
+    font-weight: bold;
+}
+#checkout-form .delivery span:nth-child(2){
+    color: #868686;
+}
+#checkout-form .delivery span:nth-child(4){
+    color: #F53E31;
+    font-weight: bold;
+}
+
+#checkout-form .total-price{
+    color: #F53E31;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#checkout-form .total-quantity{
+    color: #868686;
+}

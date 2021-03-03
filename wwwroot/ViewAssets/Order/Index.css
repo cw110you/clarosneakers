@@ -1,0 +1,27 @@
+#order-list-page{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#order-list-page img{
+    width: 100%;
+}
+
+#order-list-page form hr{
+    margin: 8px 0;
+}
+
+#order-list-page a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#order-list-page .total-price{
+    color: #F53E31;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#order-list-page .total-quantity{
+    color: #868686;
+}

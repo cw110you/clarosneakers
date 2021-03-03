@@ -1,0 +1,51 @@
+#cart-page{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#cart-page img{
+    width: 100%;
+}
+
+#cart-page form hr{
+    margin: 8px 0;
+}
+
+#cart-page a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+
+#cart-form .sub-total{
+    color: #F53E31;
+}
+
+#cart-form .total-price{
+    color: #F53E31;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+#cart-form .total-quantity{
+    color: #868686;
+}
+
+#message{
+    position: fixed;
+    top: 50%;
+    left: 50%; 
+    margin-left: -110px;
+    margin-top: -75px;
+    width: 220px;
+    height: 150px;
+    text-align: center;
+    line-height: 150px;
+    background-color: rgba(226, 226, 226, 0.9);
+    color: rgb(87, 87, 87);
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 25px;
+    z-index: 999;
+}

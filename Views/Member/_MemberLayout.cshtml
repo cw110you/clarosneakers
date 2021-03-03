@@ -1,0 +1,32 @@
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "ClaroSneakers";
+}
+
+<div id="member-layout" class="jumbotron" data-onload="memberOnload()">
+    <div class="container">
+        <div class="row">
+            <div class="left col-lg-2 col-md-3 col-sm-10 col-12 offset-sm-1 offset-md-0">
+                <nav class="nav flex-row">
+                    <h4 class="d-none d-md-block">會員中心</h4>
+                    <a class="nav-link" href="/member">個人資料</a>
+                    <a class="nav-link" href="/order">訂單查詢</a>
+                    <a class="nav-link" href="/member/password">更改密碼</a>
+                </nav>
+            </div>
+            
+            <div class="right col-lg-8 col-md-7 col-sm-10 col-12 offset-sm-1 offset-md-0">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Member/_memberlayout.css">
+    @RenderSection("styles", required: false)
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Member/_memberlayout.js"></script>
+    @RenderSection("footscripts", required: false)
+}

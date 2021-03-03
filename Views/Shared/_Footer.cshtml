@@ -1,0 +1,47 @@
+@using webstore.Services;
+@inject Categories categories;
+
+<div id="footer" class="jumbotron">
+    <div class="container p-0">
+        <div class="row no-gutters row-cols-lg-4 row-cols-md-2 row-cols-1">
+            <div class="column col text-left">
+                <div class="column">
+                    <h4>產品種類</h4>
+                    <ul class="twos">
+                        @foreach (var cat in categories.categories)
+                        {
+                            <li><a href="">@cat.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="column col text-left">
+                <div class="column">
+                    <h4>會員中心</h4>
+                    <ul>
+                        <li><a href="">會員資料</a></li>
+                        <li><a href="">訂單管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column col text-left">
+                <div class="column">
+                    <h4>常見問題</h4>
+                    <ul class="twos">
+                        <li><a href="">購物流程</a></li>
+                        <li><a href="">付款方式</a></li>
+                        <li><a href="">配送方式</a></li>
+                        <li><a href="">售後服務</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col text-left">
+                <div class="column">
+                    <h4>聯絡我們</h4>
+                    <div>TEL: 0800-000-000</div>
+                    <div>service@clarosneakers.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

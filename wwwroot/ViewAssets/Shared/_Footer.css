@@ -1,0 +1,29 @@
+footer .jumbotron{
+    background-color: #FFF;
+    margin: 0;
+    padding: 50px 0 40px 0;
+}
+
+footer ul{
+    list-style: none;
+    padding: 0;
+
+}
+
+footer ul a{
+    color: #8C8C8C;
+}
+
+footer ul a:hover{
+    color: #8C8C8C;
+    font-weight: bold;
+    text-decoration: none;
+}
+footer .column{
+    padding-left: 15px;
+}
+ul.twos li{
+    float: left;
+    width: 50%;
+}
+

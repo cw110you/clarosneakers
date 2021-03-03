@@ -1,0 +1,56 @@
+@model ProductSearchViewModel
+<div id=search-result class="jumbotron">
+    <section>
+        <div id="sort-bar" class="container pt-3 pb-3">
+            <span class='title-font @(Model.orderby == "date" ? "active" : "")' onclick="sort('date')">上架日期<i class='fas @(Model.order == "desc" && Model.orderby == "date" ? "fa-long-arrow-alt-up" : "fa-long-arrow-alt-down")'></i></span>
+            <span class='title-font @(Model.orderby == "price" ? "active" : "")' onclick="sort('price')">價格<i class='fas @(Model.order == "desc" && Model.orderby == "price" ? "fa-long-arrow-alt-up" : "fa-long-arrow-alt-down")'></i></span>
+            共有 @Model.products.Count 筆商品
+        </div>
+    </section>
+
+    <section>
+        <div id="products" class="container p-0 pb-4">
+            @if(ViewData.ModelState.IsValid && Model.page <= Model.totalPages){
+                <div class="row no-gutters  row-cols-lg-5 row-cols-md-3 row-cols-1">
+                    @for(int i = (Model.page-1)*ProductSearchViewModel.pageSize ; i < Model.page*ProductSearchViewModel.pageSize && i < Model.products.Count ; i++  ){
+                        <div class="product" onclick="redirectToDetail(@Model.products[i].Id)">
+                            <span class="image"><img src="/images/products/default.png" data-src="@Model.products[i].Images.FirstOrDefault().Url" onload="imgScaler(event)" /></span>
+                            <span class="name title-font">@Model.products[i].Name</span>
+                            <span class="price title-font">$@Model.products[i].Price</span>
+                        </div>
+
+                    }
+                </div>
+            }
+            else{
+                <div class="not-found title-font">沒有找到相關商品</div>
+            }
+        </div>
+    </section>
+    
+    <section>
+        @if(ViewData.ModelState.IsValid && Model.displayPages.Count > 1){
+            <div id="pagination" class="container p-0 pb-4">
+                <ul class="pagination justify-content-center">
+                    <li class='page-item @(Model.page == 1 ? "disabled" : "")'><span class="page-link" data-page="1" onclick="redirectToPage(1)"><i class="fas fa-angle-double-left"></i></span></li>
+                    <li class='page-item @(Model.page == 1 ? "disabled" : "")'><span class="page-link" data-page="prev" onclick="redirectToPage('prev')"><i class="fas fa-angle-left"></i></span></li>
+                    @foreach (var p in Model.displayPages)
+                    {
+                        <li class='page-item @(p == Model.page.ToString() ? "active" : "") @(p == "…" ? "disabled" : "")'><span class="page-link" data-page="@p" @(p == Model.page.ToString() ? "" : "onclick=redirectToPage("+p+")")>@p</span></li>
+                    }
+                    <li class='page-item @(Model.page == Model.totalPages ? "disabled" : "")'><span class="page-link" data-page="next" onclick="redirectToPage('next')"><i class="fas fa-angle-right"></i></span></li>
+                    <li class='page-item @(Model.page == Model.totalPages ? "disabled" : "")'><span class="page-link" data-page="@Model.totalPages" onclick="redirectToPage(@Model.totalPages)"><i class="fas fa-angle-double-right"></i></span></li>
+                </ul>
+            </div>
+        }
+    </section>
+</div>
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Product/search.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Product/search.js"></script>
+}

@@ -1,0 +1,100 @@
+@model Product
+
+<div id="product-detail" class="jumbotron" data-onload="detailOnload()">
+    <div class="container">
+        @if(!(Model == null)){
+            <div class="row">
+                <div id="images" class="col-lg-8 col-md-7 col-12">
+                    <div class="preview" data-previewing-index="0">
+                        <img src="/images/products/default.png" data-src="@Model.Images.FirstOrDefault().Url" onload="imgScaler(event, 1000)" />
+                    </div>
+
+                    <div class="thumbnail">
+                        <ul class="thumbnail-list" data-index="0">
+                            @for(var i=0 ; i < Model.Images.Count ; i++)
+                            {
+                                <li onclick="preview(@i)" data-image-index="@i" @(i == 0 ? "class=active" : "")><img src="/images/products/default.png" data-src="@Model.Images[i].Url" onload="imgScaler(event, 1000)"></li>
+                            }
+                        </ul>
+                        <i class="btn-prev fas fa-chevron-left fa-2x" onclick="thumbnailSlider(-1)"></i>
+                        <i class="btn-next fas fa-chevron-right fa-2x" onclick="thumbnailSlider(1)"></i>
+                    </div>
+                </div>
+
+
+
+                <div id="info" class="col-lg-4 col-md-5 col-12">
+                    <form id="orderform">
+                        <h4>@Model.Name</h4><hr>
+
+                        <div class="price">
+                            <label>價格：</label>
+                            <span class="title-font">$@Model.Price</span>
+                        </div>
+
+                        @if(Model.Stock > 0){
+                            <div class="quantity-selector">
+                                <label>數量：</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(-1)">－</button>
+                                    </div>
+                                    <input id="quantity" type="text" class="form-control" value="1" data-stock="@Model.Stock" onchange="changeQuantity(0)">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(1)">＋</button>
+                                    </div>
+                                </div>
+                                <label class="stock">庫存:@Model.Stock</label>
+                            </div>
+
+                            <div class="cart-button">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="addToCart()">放入購物車</button>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" onclick='addToCart("/cart")'>直接購買</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="message" class="d-none title-font"></div>
+                            <input id="productId" type="hidden" value="@Model.Id">
+                            <input id="stock" type="hidden" value="@Model.Stock">
+                        }
+                        else{
+                            <div class="no-stock title-font">
+                                補貨中
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+
+
+
+            <div id="detail" class="row">
+                <div id="spec" class="col-12">
+                    <h5>商品規格</h5>
+                    @Model.Specification
+                </div>
+
+                <div id="desc" class="col-12">
+                    <h5>商品描述</h5>
+                    @Model.Description
+                </div>
+            </div>
+        }
+        else{
+            <div class="not-found title-font">無此商品</div>
+        }
+    </div>
+</div>
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Product/detail.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}
+@section footscripts{
+    <script type="text/javascript" src="/ViewAssets/Product/detail.js"></script>
+}

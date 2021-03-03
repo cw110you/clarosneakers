@@ -1,0 +1,98 @@
+@model List<Order>
+
+<div id="order-list-page">
+    <div class="container py-3">
+        @if (Model != null)
+        {
+            <div class="row py-3">
+                <span class="col-3">訂單日期</span>
+                <span class="col-4">訂單編號</span>
+                <span class="col-3">訂單金額</span>
+                <span class="col-2">訂單狀態</span>
+            </div>
+            foreach (var order in Model)
+            {
+                Int32 totalPrice = 0;
+                @foreach (var item in order.OrderItems)
+                {
+                    totalPrice += item.Price * item.Quantity;
+                }
+                <div class="row">
+                    <span class="col-3">@order.OrderStatuses[0].Date</span>
+                    <span class="col-4">@order.OrderNumber</span>
+                    <span class="col-3">@totalPrice</span>
+                    <span class="col-2">@order.OrderStatuses[order.OrderStatuses.Count - 1].State.Name</span>
+                </div>
+
+                <div class="order-detael">
+                    <div class="row">
+                        <span class="offset-5 col-2 text-right">單價</span>
+                        <span class="col-2 text-right">數量</span>
+                        <span class="col-3 text-right">合計</span>
+                    </div>
+
+                    @{Int32 totalQuantity = 0;}
+                    @foreach (var item in order.OrderItems)
+                    {
+                        Int32 subTotal = item.Price * item.Quantity;
+                        totalQuantity += item.Quantity;
+                        <div class="row align-items-center" data-product-id="@item.ProductId">
+                            <span class="col-md-1 d-none d-md-block" href="/product/detail/@item.ProductId"><div class="row"><span class="col-12"><img src="/images/products/default.png" data-src="@item.Product.Images.FirstOrDefault().Url" onload="imgScaler(event)"></span></div></span>
+                            <span class="col-md-4 col-5">@item.Product.Name</span>
+                            <span class="col-2 text-right">$@item.Product.Price</span>
+                            <span class="col-2 text-right">@item.Quantity</span>
+                            <span class="col-3 text-right">$@subTotal</span>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <span>運費：$150</span>
+                        </div>
+                    </div>
+
+                    <hr class="col-12">
+                    <div class="row">
+                        <span class="col-12 font-weight-bold my-2">配送資料</span>
+
+                        <span class="col-12 my-1 pl-5">收件人：@order.Consignee</span>
+                        <span class="col-12 my-1 pl-5">電話：@order.PhoneNumber</span>
+                        <span class="col-12 my-1 pl-5">地址：@order.Address</span>
+                        <span class="col-12 my-1 pl-5">備註：@(order.Remark == null ? "無" : order.Remark)</span>
+                    </div>
+
+                    <hr class="col-12">
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <span class="total-quantity">(共 @totalQuantity 件商品)</span>
+                            <span class="total-price">$@(totalPrice+150)</span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+            }
+        }
+        else
+        {
+            <div class="col-12 py-5">
+                <div class="d-flex justify-content-center mb-4">
+                    <h4>查無訂單</h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="/"><button class="btn btn-secondary">回首頁</button></a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="/ViewAssets/Order/Index.css">
+}
+@section headscripts {
+    <script type="text/javascript" src="/ViewAssets/Shared/thumbnail.js"></script>
+}
+@section footscripts {
+    <script type="text/javascript" src="/ViewAssets/Order/Index.js"></script>
+}

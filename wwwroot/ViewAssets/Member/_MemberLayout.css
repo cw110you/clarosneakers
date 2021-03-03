@@ -1,0 +1,22 @@
+#member-layout{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#member-layout:first-child{
+    padding: 35px 0;
+}
+
+a.nav-link{
+    color: #8C8C8C;
+}
+a.nav-link.active{
+    font-weight: bold;
+}
+
+@media (max-width: 767px){
+    #member-layout:first-child{
+    padding: 0 0 15px 0;
+    }
+}

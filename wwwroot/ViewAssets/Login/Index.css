@@ -1,0 +1,22 @@
+#login{
+    background-color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+
+#login form span{
+    float: right;
+    right: 20px;
+}
+#login form span a, #login form span a:hover{
+    text-decoration: none;
+    color: #555555;
+    font-size: .8rem;
+}
+
+#login #error-message{
+    margin-bottom: 12px;
+    color: #eb7373;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
